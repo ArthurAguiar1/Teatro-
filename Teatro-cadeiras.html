@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>Teatro</title>
+    <link rel="stylesheet" href="Style.css">
+    <script language="javascript">
+
+        var lugar;
+        function criaLugares() {
+            var lin, col;
+            lugar = new Array(15);
+            for (lin = 0; lin < 15; ++lin) {
+                lugar[lin] = new Array(40);
+            }
+
+            for (lin = 0; lin < 15; ++lin) {
+                for (col = 0; col < 40; ++col) {
+                    lugar[lin][col] = 0;
+                }
+            }
+        }
+
+        function selec(l, c) {
+            if (lugar[l][c] == 1) {
+                alert("ta ocupado lixo");
+            }
+            else {
+                lugar[l][c] = 1;
+                document.getElementById("pot" + l + "-" + c).setAttribute("src", "p2.png")
+            }
+        }
+
+        function vlr() 
+        {
+            var lin, col, valor, total;
+            total = 0;
+            
+            for (lin = 0; lin < 15; ++lin) 
+            {
+                for (col = 0; col < 40; ++col) 
+                {
+                    if (lugar[lin][col] == 1) 
+                    {
+                        if (lin <= 4) 
+                        {
+                            valor = 50;
+
+                        }
+                        else if (lin <= 9) 
+                        {
+                            valor = 40;
+                        }
+                        else 
+                        {
+                            valor = 30;
+                        }
+                        if (col >= 10 && col < 30 )
+                        {
+                            valor *= 1.1; 
+                        }
+                        total = total + valor; 
+
+                    }
+                }
+            }
+            alert(total);
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <script language="javascript">
+                    var lin, col;
+                    criaLugares();
+                    document.write("<table border='1' align= 'center'>");
+                    for (lin = 0; lin < 15; lin++) {
+                        document.write("<tr>");
+                        for (col = 0; col < 40; col++) {
+                            document.write("<td><img src='poltrona.png' id='pot" + lin + "-" + col + "' onclick='selec(" + lin + "," + col + ")'><br>");
+                        }
+                        document.write("</tr>");
+                    }
+                    document.write("</table>");
+            </script>
+            <input type="button" colspan="40" value="Valor Final" onclick="vlr()">
+        </div>
+    </form>
+</body>
+
+</html>
